@@ -46,7 +46,8 @@ for T_water_interpolated = T_in_water
     continue % Skip to next iteration
   end
 
-  if 10 < T_water_interpolated < 15 % If temperature is 15C
+  % If temperature is between 10C and 15C
+  if 10 < T_water_interpolated && T_water_interpolated < 15
     % Calculating temperature interpolation factor from (mid - low)/(high - low)
     T_interpolation_factor = (T_water_interpolated - T_water_10) ...
                              /(T_water_15 - T_water_10);
@@ -56,7 +57,8 @@ for T_water_interpolated = T_in_water
     continue % Skip to next iteration
   end
 
-  if 15 < T_water_interpolated < 20 % If temperature is 15C
+  % if temperature is between 15C and 20C
+  if 15 < T_water_interpolated && T_water_interpolated < 20 % If temperature is 15C
     % Calculating temperature interpolation factor from (mid - low)/(high - low)
     T_interpolation_factor = (T_water_interpolated - T_water_15) ...
                              /(T_water_20 - T_water_15);
@@ -72,12 +74,24 @@ for T_water_interpolated = T_in_water
     continue % Skip to next iteration
   end
 
-  if 20 < T_water_interpolated < 25 % If temperature is 15C
+  % if temperature is between 20C and 25C
+  if 20 < T_water_interpolated && T_water_interpolated < 25 % If temperature is 15C
     % Calculating temperature interpolation factor from (mid - low)/(high - low)
     T_interpolation_factor = (T_water_interpolated - T_water_20) ...
                              /(T_water_25 - T_water_20);
     % Interpolating for the enthalpy value (h)
     h = (h_R_25 - h_R_20) * T_interpolation_factor + h_R_20;
+    h_R_water(counter) = h; % Setting interpolated value to a matrix
+    continue % Skip to next iteration
+  end
+
+  % if temperature is between 25C and 30C
+   if 25 < T_water_interpolated && T_water_interpolated < 30 % If temperature is 15C
+    % Calculating temperature interpolation factor from (mid - low)/(high - low)
+    T_interpolation_factor = (T_water_interpolated - T_water_25) ...
+                             /(T_water_30 - T_water_25);
+    % Interpolating for the enthalpy value (h)
+    h = (h_R_30 - h_R_25) * T_interpolation_factor + h_R_25;
     h_R_water(counter) = h; % Setting interpolated value to a matrix
     continue % Skip to next iteration
   end
