@@ -2,6 +2,7 @@
 % Student ID: 110076575
 % Email: ebrahimo@uwindsor.ca
 clear; clc;
+
 % This section defines variables for ethylene glycol
 c_p_glycol = 2.56; % Defining cp to 2.56 kJ/kg*C
 m_dot_glycol = 3.2; % Defining flow rate of 3.2 kg/s
@@ -23,8 +24,19 @@ h_glycol = c_p_glycol * (T_out_glycol - T_in_glycol);
 % Display results
 fprintf("Therefore, the enthalpy (h) of ethylene glycol is %f\n", h_glycol)
 
-% 2) Solving for saturated liquid water enthalpy (h_sat)
-h_R = [42.022, 125.74]; % Enthalpy values for Temperature 10C and 30C
+% 2) Solving for saturated liquid water enthalpy (h_R)
+h_R_low = 42.022; % Enthalpy values for Temperature 10C
+h_R_high = 125.74; % Enthalpy values for Temperature 30C
+counter = 0; % Intialize counter for the for loop
+h_R_water = zeros(1); % Intialize results matrix for the for loop
+
+% This for loop calculates the interpolated enthalphy values of water
 for T_water_interpolated = T_in_water
-    break
+  counter = counter + 1; % Add counter with 1
+  % Calculating temperature interpolation factor from (mid - low)/(high - low)
+  T_interpolation_factor = (T_water_interpolated - T_low_water) ...
+                           /(T_high_water - T_low_water);
+  % Interpolating for the enthalpy value (h)
+  h = (h_R_high - h_R_low) * T_interpolation_factor + h_R_low;
+  h_R_water(counter) = h; % Setting interpolated value to a matrix
 end
