@@ -11,11 +11,14 @@ T_out_glycol = 40; % Defining outlet temperature to 40C
 
 % This section defines variables for water
 c_p_water = 4.18; % Defining cp to 4.18 kJ/kg*C
-T_high_water = 30; % Defining high inlet water temperature to 30C 
-T_low_water = 10; % Defining low inlet water temperature to 10C
+T_water_10 = 10; % Defining water temperature at 10C
+T_water_15 = 15; % Defining water temperature at 15C
+T_water_20 = 20; % Defining water temperature at 20C
+T_water_25 = 25; % Defining water temperature at 25C
+T_water_30 = 30; % Defining water temperature at 30C
 interval = 2; % Defining interval to 2C
 % Defining inlet temperature from 10C to 30C in increments of 2C
-T_in_water = T_low_water:interval:T_high_water;
+T_in_water = T_water_10:interval:T_water_30;
 T_out_water = 70; % Defining outlet temperature to 70C
 
 % 1) Solving for enthalpy (h) for ethylene glycol
@@ -25,18 +28,64 @@ h_glycol = c_p_glycol * (T_out_glycol - T_in_glycol);
 fprintf("Therefore, the enthalpy (h) of ethylene glycol is %f\n", h_glycol)
 
 % 2) Solving for saturated liquid water enthalpy (h_R)
-h_R_low = 42.022; % Enthalpy values for Temperature 10C
-h_R_high = 125.74; % Enthalpy values for Temperature 30C
+h_R_10 = 42.022; % Enthalpy values for Temperature 10C
+h_R_15 = 62.982; % Enthalpy values for Temperature 15C
+h_R_20 = 83.915; % Enthalpy values for Temperature 20C
+h_R_25 = 104.83; % Enthalpy values for Temperature 25C
+h_R_30 = 125.74; % Enthalpy values for Temperature 30C
 counter = 0; % Intialize counter for the for loop
 h_R_water = zeros(1); % Intialize results matrix for the for loop
 
 % This for loop calculates the interpolated enthalphy values of water
 for T_water_interpolated = T_in_water
   counter = counter + 1; % Add counter with 1
-  % Calculating temperature interpolation factor from (mid - low)/(high - low)
-  T_interpolation_factor = (T_water_interpolated - T_low_water) ...
-                           /(T_high_water - T_low_water);
-  % Interpolating for the enthalpy value (h)
-  h = (h_R_high - h_R_low) * T_interpolation_factor + h_R_low;
-  h_R_water(counter) = h; % Setting interpolated value to a matrix
+
+  if T_water_interpolated == 10 % If temperature is 10C
+    h = h_R_10; % Set enthalpy value to 42.022
+    h_R_water(counter) = h; % Setting enthalpy value to a matrix
+    continue % Skip to next iteration
+  end
+
+  if 10 < T_water_interpolated < 15 % If temperature is 15C
+    % Calculating temperature interpolation factor from (mid - low)/(high - low)
+    T_interpolation_factor = (T_water_interpolated - T_water_10) ...
+                             /(T_water_15 - T_water_10);
+    % Interpolating for the enthalpy value (h)
+    h = (h_R_15 - h_R_10) * T_interpolation_factor + h_R_10;
+    h_R_water(counter) = h; % Setting interpolated value to a matrix
+    continue % Skip to next iteration
+  end
+
+  if 15 < T_water_interpolated < 20 % If temperature is 15C
+    % Calculating temperature interpolation factor from (mid - low)/(high - low)
+    T_interpolation_factor = (T_water_interpolated - T_water_15) ...
+                             /(T_water_20 - T_water_15);
+    % Interpolating for the enthalpy value (h)
+    h = (h_R_15 - h_R_10) * T_interpolation_factor + h_R_10;
+    h_R_water(counter) = h; % Setting interpolated value to a matrix
+    continue % Skip to next iteration
+  end
+
+  if T_water_interpolated == 20 % If temperature is 20C
+    h = h_R_20; % Set enthalpy value to 83.915
+    h_R_water(counter) = h; % Setting enthalpy value to a matrix
+    continue % Skip to next iteration
+  end
+
+  if 20 < T_water_interpolated < 25 % If temperature is 15C
+    % Calculating temperature interpolation factor from (mid - low)/(high - low)
+    T_interpolation_factor = (T_water_interpolated - T_water_20) ...
+                             /(T_water_25 - T_water_20);
+    % Interpolating for the enthalpy value (h)
+    h = (h_R_25 - h_R_20) * T_interpolation_factor + h_R_20;
+    h_R_water(counter) = h; % Setting interpolated value to a matrix
+    continue % Skip to next iteration
+  end
+
+
+  if T_water_interpolated == 30 % If temperature is 30C
+    h = h_R_30; % Set enthalpy value to 125.74
+    h_R_water(counter) = h; % Setting enthalpy value to a matrix
+    continue % Skip to next iteration
+  end
 end
