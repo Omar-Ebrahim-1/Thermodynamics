@@ -68,7 +68,7 @@ for T_water_interpolated = T_in_water
     T_interpolation_factor = (T_water_interpolated - T_water_15) ...
                              /(T_water_20 - T_water_15);
     % Interpolating for the enthalpy value (h)
-    h = (h_R_15 - h_R_10) * T_interpolation_factor + h_R_10;
+    h = (h_R_20 - h_R_15) * T_interpolation_factor + h_R_15;
     h_R_water(counter) = h; % Setting interpolated value to a matrix
     continue % Skip to next iteration
   end
@@ -122,7 +122,7 @@ hold off; % Turn off hold
 title('Inlet Temperature vs Mass Flow Rate of Water'); % Setting title
 xlabel('Inlet Temperature (C)'); % Setting x-axis label
 ylabel('Mass Flow Rate of Water (kg/s)'); % Setting y-axis label
-legend('Analytical', 'Interpolated'); % Setting legend
+legend('Constant specific heat', 'Saturated liquid enthalpy'); % Setting legend
 grid on; % Turning on grid
 
 % Outputting data to a data ledger
