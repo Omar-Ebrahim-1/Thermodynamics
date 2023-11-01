@@ -124,3 +124,13 @@ xlabel('Inlet Temperature (C)'); % Setting x-axis label
 ylabel('Mass Flow Rate of Water (kg/s)'); % Setting y-axis label
 legend('Analytical', 'Interpolated'); % Setting legend
 grid on; % Turning on grid
+
+% Outputting data to a data ledger
+fprintf('Inlet Temperature (C) | Mass Flow Rate of Water from constant specific' ...
+        'heat | Mass Flow Rate of Water from saturated liquid enthalpy\n');
+fprintf('---------------------------------------------------------------------' ...
+        '---------------------------------------------------------------\n');
+for i = 1:length(T_in_water)
+  fprintf('%20.2f | %56.2f | %64.2f\n', T_in_water(i), m_dot_water_analytical(i), ...
+          m_dot_water_interpolated(i));
+end
