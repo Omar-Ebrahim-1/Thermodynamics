@@ -8,6 +8,7 @@ c_p_glycol = 2.56; % Defining cp to 2.56 kJ/kg*C
 m_dot_glycol = 3.2; % Defining flow rate of 3.2 kg/s
 T_in_glycol = 80; % Defining inlet temperature to 80C
 T_out_glycol = 40; % Defining outlet temperature to 40C
+h_glycol = c_p_glycol * (T_out_glycol - T_in_glycol); % Calculating enthalpy of glycol
 
 % This section defines variables for water
 c_p_water = 4.18; % Defining cp to 4.18 kJ/kg*C
@@ -21,13 +22,17 @@ interval = 2; % Defining interval to 2C
 T_in_water = T_water_10:interval:T_water_30;
 T_out_water = 70; % Defining outlet temperature to 70C
 
-% 1) Solving for enthalpy (h) for ethylene glycol
+% 1) Solving for enthalpy (h) for water analytically
 % Solving for enthalpy (h) using h = cp*deltaT = cp(T_out - T_in)
-h_glycol = c_p_glycol * (T_out_glycol - T_in_glycol);
-% Display results
-fprintf("Therefore, the enthalpy (h) of ethylene glycol is %f\n", h_glycol)
+counter = 0; % Intialize counter for the for loop
+h_water_analytical = zeros(1); % Intialize results matrix for the for loop
+for T_water_analytical = T_in_water
+  counter = counter + 1; % Add counter with 1
+  h = c_p_water * (T_out_water - T_water_analytical);
+  h_water_analytical(counter) = h; % Setting enthalpy value to a matrix
+end
 
-% 2) Solving for saturated liquid water enthalpy (h_R)
+% 2) Solving for saturated liquid water enthalpy (h_R) using interpolation
 h_R_10 = 42.022; % Enthalpy values for Temperature 10C
 h_R_15 = 62.982; % Enthalpy values for Temperature 15C
 h_R_20 = 83.915; % Enthalpy values for Temperature 20C
@@ -103,3 +108,19 @@ for T_water_interpolated = T_in_water
     continue % Skip to next iteration
   end
 end
+
+% Calculating the mass flow rate of water from analytical enthalpy
+m_dot_water_analytical = m_dot_glycol * h_glycol ./ h_water_analytical;
+% Calculating the mass flow rate of water from interpolated enthalpy
+m_dot_water_interpolated = m_dot_glycol * h_glycol ./ h_R_water;
+
+% Plotting inlet temperature vs mass flow rate of water
+plot(T_in_water, m_dot_water_analytical); % Plotting analytical values
+hold on; % Hold on to plot the next graph
+plot(T_in_water, m_dot_water_interpolated); % Plotting interpolated values
+hold off; % Turn off hold
+title('Inlet Temperature vs Mass Flow Rate of Water'); % Setting title
+xlabel('Inlet Temperature (C)'); % Setting x-axis label
+ylabel('Mass Flow Rate of Water (kg/s)'); % Setting y-axis label
+legend('Analytical', 'Interpolated'); % Setting legend
+grid on; % Turning on grid
