@@ -115,9 +115,9 @@ m_dot_water_analytical = m_dot_glycol * h_glycol ./ h_water_analytical;
 m_dot_water_interpolated = m_dot_glycol * h_glycol ./ h_R_water;
 
 % Plotting inlet temperature vs mass flow rate of water
-plot(T_in_water, m_dot_water_analytical); % Plotting analytical values
+plot(T_in_water, m_dot_water_analytical, '-o'); % Plotting analytical values
 hold on; % Hold on to plot the next graph
-plot(T_in_water, m_dot_water_interpolated); % Plotting interpolated values
+plot(T_in_water, m_dot_water_interpolated, '--s'); % Plotting interpolated values
 hold off; % Turn off hold
 title('Inlet Temperature vs Mass Flow Rate of Water'); % Setting title
 xlabel('Inlet Temperature (C)'); % Setting x-axis label
