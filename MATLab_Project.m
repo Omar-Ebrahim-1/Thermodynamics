@@ -10,5 +10,21 @@ T_out_glycol = 40; % Defining outlet temperature to 40C
 
 % This section defines variables for water
 c_p_water = 4.18; % Defining cp to 4.18 kJ/kg*C
-T_in_water = 10:2:30; % Defining inlet temperature from 10C to 30C in increments of 2C
+T_high_water = 30; % Defining high inlet water temperature to 30C 
+T_low_water = 10; % Defining low inlet water temperature to 10C
+interval = 2; % Defining interval to 2C
+% Defining inlet temperature from 10C to 30C in increments of 2C
+T_in_water = T_low_water:interval:T_high_water;
 T_out_water = 70; % Defining outlet temperature to 70C
+
+% 1) Solving for enthalpy (h) for ethylene glycol
+% Solving for enthalpy (h) using h = cp*deltaT = cp(T_out - T_in)
+h_glycol = c_p_glycol * (T_out_glycol - T_in_glycol);
+% Display results
+fprintf("Therefore, the enthalpy (h) of ethylene glycol is %f\n", h_glycol)
+
+% 2) Solving for saturated liquid water enthalpy (h_sat)
+h_R = [42.022, 125.74]; % Enthalpy values for Temperature 10C and 30C
+for T_water_interpolated = T_in_water
+    break
+end
