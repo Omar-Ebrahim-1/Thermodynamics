@@ -17,14 +17,14 @@
 \usepackage{caption} % Allows for custom captions
 
 \fancypagestyle{myarticlestyle}{
-    \fancyhf{} % Clear header and footer
-    \fancyhead[L]{\leftmark} % Section name on the left
-    \fancyhead[R]{\thepage} % Page number on the right
+  \fancyhf{} % Clear header and footer
+  \fancyhead[L]{\leftmark} % Section name on the left
+  \fancyhead[R]{\thepage} % Page number on the right
 }
 \fancypagestyle{tocstyle}{
-    \fancyhf{} % Clear header and footer
-    \fancyhead[L]{CONTENTS} % Section name on the left
-    \fancyhead[R]{\thepage} % Page number on the right
+  \fancyhf{} % Clear header and footer
+  \fancyhead[L]{CONTENTS} % Section name on the left
+  \fancyhead[R]{\thepage} % Page number on the right
 }
 
 \pagestyle{myarticlestyle}
@@ -37,19 +37,118 @@ of Windsor}
 
 \begin{document}
 \maketitle
-Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud
-officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat
-reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia
-voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt
-duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt
-velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est
-culpa et culpa duis.
+\tableofcontents
+\listoffigures
+\newpage
+\section{Results}
+The following are the results of the MATLAB code. The data ledger is shown in
+Figure \ref{fig:ledger}. The data ledger shows the data for the inlet temperature,
+mass flow rate of water from constant specific heat, mass flow rate of water from
+saturated liquid water interpolation.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{../data_ledger.png}
+  \caption{Data ledger}
+  \label{fig:ledger}
+\end{figure}
+The graphs of the inlet temperature vs the mass flow rate of water from constant
+specific heat and mass flow rate of water from saturated liquid water interpolation
+are shown in Figure \ref{fig:graphs}. The blue line represents the mass flow rate
+of water from constant specific heat and the red line represents the mass flow
+rate of water from saturated liquid water interpolation.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.63\textwidth]{../graph.png}
+  \caption{Graphs of the inlet temperature vs the mass flow rate of water from
+  constant specific heat and mass flow rate of water from saturated liquid water
+  interpolation}
+  \label{fig:graphs}
+\end{figure}
+\section{Variance}
+As shown in Figure \ref{fig:ledger}, the range of the mass flow rate of water
+from constant specific heat is between -1.96 and -1.31. The range of the mass
+flow rate of water from saturated liquid water interpolation is between -7.80
+and -2.61. \\[10pt]
+The variance is shown graphically in Figure \ref{fig:graphs}. The
+data from the mass flow rate of water from saturated liquid water interpolation
+is more accurate than the data from the mass flow rate of water from constant
+specific heat. This is because the mass flow rate of water from saturated liquid
+water uses the table of saturated liquid water to interpolate the data while the
+mass flow rate of water from constant specific heat uses a large assumption that
+the specific heat of water is constant.
+\section{Percent Error}
+To find the percent error, calculate the average of the mass flow rate of water
+from constant specific heat and the mass flow rate of water from saturated liquid
+water interpolation. The average of the mass flow rate of water from constant
+specific heat is found using the following equation:
+\begin{equation}
+  \bar{m}_{\text{constant specific heat}} = \frac{1}{n}\sum_{i=1}^{n}m_i
+  \label{eq:average_constant_specific_heat}
+\end{equation}
+Putting the values from the data ledger into Equation
+\ref{eq:average_constant_specific_heat} gives:
+\begin{align}
+  \bar{m}_{\text{constant specific heat}} &= \frac{1}{11}(-1.31 - 1.35 - 1.4 - 1.45 - 1.51 \nonumber \\
+  &\quad - 1.57 - 1.63 - 1.7 - 1.78 - 1.87 - 1.96) \nonumber \\
+  &= -1.5937
+  \label{eq:average_constant_specific_heat_values}
+\end{align}
+The average of the mass flow rate of water from saturated liquid water interpolation
+is found using the following equation:
+\begin{equation}
+  \bar{m}_{\text{saturated liquid water interpolation}} = \frac{1}{n}\sum_{i=1}^{n}m_i
+  \label{eq:average_saturated_liquid_water_interpolation}
+\end{equation}
+Putting the values from the data ledger into Equation
+\ref{eq:average_saturated_liquid_water_interpolation} gives:
+\begin{align}
+  \bar{m}_{\text{saturated liquid water interpolation}} &= \frac{1}{11}(-7.8 - 6.5 - 5.57 - 4.88 - 4.34 \nonumber \\
+  &\quad - 3.9 - 3.55 - 3.26 - 3.01 - 2.79 - 2.61) \nonumber \\
+  &= -4.3822
+  \label{eq:average_saturated_liquid_water_interpolation_values}
+\end{align}
+Now that the averages are found, the percent error can be calculated using the
+following equation:
+\begin{equation}
+  \text{Percent Error} = \frac{\text{Experimental Value} - \text{Theoretical Value}}{\text{Theoretical Value}} \times 100\%
+  \label{eq:percent_error}
+\end{equation}
+Putting the values from Equations
+\ref{eq:average_constant_specific_heat_values} and
+\ref{eq:average_saturated_liquid_water_interpolation_values} into Equation
+\ref{eq:percent_error} gives:
+\begin{align}
+  \text{Percent Error} &= \frac{\lvert{-1.5937 - (-4.3822)}\rvert}{\lvert{-4.3822}\rvert} \times 100\% \nonumber \\
+  &= 63.63\%
+  \label{eq:percent_error_values}
+\end{align}
+Therefore, the percent error is 63.63\%.
+\section{Sources of Error}
+The sources of error are the assumptions made in the MATLAB code. The first
+assumption is that the specific heat of water is constant. This is not true
+because the specific heat of water changes with temperature. The second assumption
+is that the mass flow rate of water from saturated liquid water interpolation
+is accurate. The interpolation can be inaccurate because the interpolation is
+approximating the data using lines which may or may not accurately represent the
+data.
+\section{Conclusion}
+This report concludes with the following:
+\begin{enumerate}
+  \item The data from the mass flow rate of water from saturated liquid water interpolation
+  is more accurate than the data from the mass flow rate of water from constant
+  specific heat.
+  \item The percentage error of the mass flow rates of water is 63.63\%.
+  \item The sources of error are the assumptions made in the MATLAB code. The first
+  assumption is that the specific heat of water is constant. This is not true
+  because the specific heat of water changes with temperature. The second assumption
+  is that the mass flow rate of water from saturated liquid water interpolation
+  is accurate. The interpolation can be inaccurate because the interpolation is
+  approximating the data using lines which may or may not accurately represent the
+  data.
+\end{enumerate}
 \newpage
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{./Images/signature.png}
+  \centering
+  \includegraphics[width=1\textwidth]{./Images/signature.png}
 \end{figure}
 \end{document}
