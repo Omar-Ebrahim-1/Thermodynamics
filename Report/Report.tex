@@ -65,17 +65,12 @@ rate of water from saturated liquid water interpolation.
   \label{fig:graphs}
 \end{figure}
 \section{Variance}
-As shown in Figure \ref{fig:ledger}, the range of the mass flow rate of water
-from constant specific heat is between -1.96 and -1.31. The range of the mass
-flow rate of water from saturated liquid water interpolation is between -7.80
-and -2.61. \\[10pt]
-The variance is shown graphically in Figure \ref{fig:graphs}. The
-data from the mass flow rate of water from saturated liquid water interpolation
-is more accurate than the data from the mass flow rate of water from constant
-specific heat. This is because the mass flow rate of water from saturated liquid
-water uses the table of saturated liquid water to interpolate the data while the
-mass flow rate of water from constant specific heat uses a large assumption that
-the specific heat of water is constant.
+As shown in Figure \ref{fig:ledger}, the data from the mass flow rate of water
+from constant specific heat and the mass flow rate of water from saturated liquid
+water interpolation are very similar. The differences between the two data sets
+mostly starts at the the third decimal place. Therefore, there is not much variance
+between the two data sets.
+
 \section{Percent Error}
 To find the percent error, calculate the average of the mass flow rate of water
 from constant specific heat and the mass flow rate of water from saturated liquid
@@ -88,9 +83,9 @@ specific heat is found using the following equation:
 Putting the values from the data ledger into Equation
 \ref{eq:average_constant_specific_heat} gives:
 \begin{align}
-  \bar{m}_{\text{constant specific heat}} &= \frac{1}{11}(-1.31 - 1.35 - 1.4 - 1.45 - 1.51 \nonumber \\
-  &\quad - 1.57 - 1.63 - 1.7 - 1.78 - 1.87 - 1.96) \nonumber \\
-  &= -1.5937
+  \bar{m}_{\text{constant specific heat}} &= \frac{1}{11}(1.30654 + 1.35159 + 1.39986 + 1.45171 + 1.50755 \nonumber \\
+  &\quad + 1.56785 + 1.63317 + 1.70418 + 1.78164 + 1.86648 + 1.95981) \nonumber \\
+  &= 1.5937
   \label{eq:average_constant_specific_heat_values}
 \end{align}
 The average of the mass flow rate of water from saturated liquid water interpolation
@@ -102,27 +97,31 @@ is found using the following equation:
 Putting the values from the data ledger into Equation
 \ref{eq:average_saturated_liquid_water_interpolation} gives:
 \begin{align}
-  \bar{m}_{\text{saturated liquid water interpolation}} &= \frac{1}{11}(-7.8 - 6.5 - 5.57 - 4.88 - 4.34 \nonumber \\
-  &\quad - 3.9 - 3.55 - 3.26 - 3.01 - 2.79 - 2.61) \nonumber \\
-  &= -4.3822
+  \bar{m}_{\text{constant specific heat}} &= \frac{1}{11}(1.30525 + 1.35034 + 1.39867 + 1.45054 + 1.50638 \nonumber \\
+  &\quad + 1.56668 + 1.63196 + 1.70291 + 1.78031 + 1.86506 + 1.95829) \nonumber \\
+  &= 1.5924
   \label{eq:average_saturated_liquid_water_interpolation_values}
 \end{align}
 Now that the averages are found, the percent error can be calculated using the
 following equation:
 \begin{equation}
-  \text{Percent Error} = \frac{\text{Experimental Value} - \text{Theoretical Value}}{\text{Theoretical Value}} \times 100\%
+  \text{Percent Error} = \left| \frac{\text{Experimental Value} - \text{Theoretical Value}}{\text{Theoretical Value}}\right| \times 100\%
   \label{eq:percent_error}
 \end{equation}
+Assuming that the mass flow rate of water from saturated liquid water interpolation
+is the theoretical value and the mass flow rate of water from constant specific
+heat is the experimental value.\\[10pt]
 Putting the values from Equations
 \ref{eq:average_constant_specific_heat_values} and
 \ref{eq:average_saturated_liquid_water_interpolation_values} into Equation
 \ref{eq:percent_error} gives:
 \begin{align}
-  \text{Percent Error} &= \frac{\lvert{-1.5937 - (-4.3822)}\rvert}{\lvert{-4.3822}\rvert} \times 100\% \nonumber \\
-  &= 63.63\%
+  \text{Percent Error} &= \left| \frac{1.5937 - 1.5924}{1.5924}\right| \times 100\% \nonumber \\
+  &= 0.000816 \times 100\% \nonumber \\
+  &= 0.0816\%
   \label{eq:percent_error_values}
 \end{align}
-Therefore, the percent error is 63.63\%.
+Therefore, the percent error of the mass flow rates of water is 0.0816\%.
 \section{Sources of Error}
 The sources of error are the assumptions made in the MATLAB code. The first
 assumption is that the specific heat of water is constant. This is not true
@@ -134,10 +133,10 @@ data.
 \section{Conclusion}
 This report concludes with the following:
 \begin{enumerate}
-  \item The data from the mass flow rate of water from saturated liquid water interpolation
-  is more accurate than the data from the mass flow rate of water from constant
-  specific heat.
-  \item The percentage error of the mass flow rates of water is 63.63\%.
+  \item The variance between the mass flow rate of water from constant specific
+  heat and the mass flow rate of water from saturated liquid water interpolation
+  is very small.
+  \item The percentage error of the mass flow rates of water is 0.0816\%.
   \item The sources of error are the assumptions made in the MATLAB code. The first
   assumption is that the specific heat of water is constant. This is not true
   because the specific heat of water changes with temperature. The second assumption
