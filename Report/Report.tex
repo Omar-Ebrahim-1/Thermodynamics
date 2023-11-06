@@ -64,13 +64,38 @@ rate of water from saturated liquid water interpolation.
   interpolation}
   \label{fig:graphs}
 \end{figure}
+\section{Range}
+This section will calculate the range of the mass flow rates of water from constant
+specific heat and mass flow rate of water from saturated liquid water interpolation.
+The range of the mass flow rates can be found using the following equation:
+\begin{equation}
+  \text{Range} = \text{Maximum} - \text{Minimum}
+  \label{eq:range}
+\end{equation}
+First calculate the range of the mass flow rate of water from constant specific
+heat. Putting the values from the data ledger into Equation \ref{eq:range} gives:
+\begin{align}
+  \text{Range} &= 1.95981 - 1.30654 \nonumber \\
+  &= 0.65327
+  \label{eq:range_constant_specific_heat}
+\end{align}
+Now calculate the range of the mass flow rate of water from saturated liquid water
+interpolation. Putting the values from the data ledger into Equation \ref{eq:range}
+gives:
+\begin{align}
+  \text{Range} &= 1.95829 - 1.30525 \nonumber \\
+  &= 0.65304
+  \label{eq:range_saturated_liquid_water_interpolation}
+\end{align}
+Therefore, the range of the mass flow rates of water from constant specific heat
+and mass flow rate of water from saturated liquid water interpolation are 0.65327
+and 0.65304 respectively.
 \section{Variance}
 As shown in Figure \ref{fig:ledger}, the data from the mass flow rate of water
 from constant specific heat and the mass flow rate of water from saturated liquid
 water interpolation are very similar. The differences between the two data sets
 mostly starts at the the third decimal place. Therefore, there is not much variance
 between the two data sets.
-
 \section{Percent Error}
 To find the percent error, calculate the average of the mass flow rate of water
 from constant specific heat and the mass flow rate of water from saturated liquid
@@ -133,6 +158,9 @@ data.
 \section{Conclusion}
 This report concludes with the following:
 \begin{enumerate}
+  \item The range of the mass flow rates of water from constant specific heat
+  and mass flow rate of water from saturated liquid water interpolation are 0.65327
+  and 0.65304 respectively.
   \item The variance between the mass flow rate of water from constant specific
   heat and the mass flow rate of water from saturated liquid water interpolation
   is very small.
