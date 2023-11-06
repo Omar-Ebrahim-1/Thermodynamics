@@ -38,6 +38,7 @@ h_R_15 = 62.982; % Enthalpy values for Temperature 15C
 h_R_20 = 83.915; % Enthalpy values for Temperature 20C
 h_R_25 = 104.83; % Enthalpy values for Temperature 25C
 h_R_30 = 125.74; % Enthalpy values for Temperature 30C
+h_R_70 = 293.07; % Enthalpy values for Temperature 70C
 counter = 0; % Intialize counter for the for loop
 h_R_water = zeros(1); % Intialize results matrix for the for loop
 
@@ -110,9 +111,9 @@ for T_water_interpolated = T_in_water
 end
 
 % Calculating the mass flow rate of water from analytical enthalpy
-m_dot_water_analytical = m_dot_glycol * h_glycol ./ h_water_analytical;
+m_dot_water_analytical = -m_dot_glycol * h_glycol ./ h_water_analytical;
 % Calculating the mass flow rate of water from interpolated enthalpy
-m_dot_water_interpolated = m_dot_glycol * h_glycol ./ h_R_water;
+m_dot_water_interpolated = m_dot_glycol * h_glycol ./ (h_R_water - h_R_70);
 
 % Plotting inlet temperature vs mass flow rate of water
 plot(T_in_water, m_dot_water_analytical, '-o'); % Plotting analytical values
@@ -132,6 +133,6 @@ fprintf(['---------------------------------------------------------------------'
     '---------------------------------------------------------------' ...
     '----------------------------------------------\n']);
 for i = 1:length(T_in_water)
-  fprintf('%20.2f  %56.2f  %64.2f\n', T_in_water(i), m_dot_water_analytical(i), ...
+  fprintf('%20d  %56.5f  %64.5f\n', T_in_water(i), m_dot_water_analytical(i), ...
           m_dot_water_interpolated(i));
 end
