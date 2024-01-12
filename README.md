@@ -1,4 +1,4 @@
-# Tube-in-Tube Heat Exchanger Project
+# Heat Exchanger Design
 
 A Tube-in-Tube heat exchanger designed to cool an ethylene glycol-water mixture. This project investigates the effect of the inlet temperature on the required mass flow rate in a heat exchanger. The project is implemented using MATLAB for simulation and LaTeX for documentation.
 
